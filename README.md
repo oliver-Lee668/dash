@@ -1,15 +1,15 @@
-#使用client-go 中的三种 client：
+使用client-go 中的三种 client：
 
-Clientset
+1、Clientset
 Clientset 是我们最常用的 client，你可以在它里面找到 kubernetes 目前所有原生资源对应的 client。 获取方式一般是，指定 group 然后指定特定的 version，然后根据 resource 名字来获取到对应的 client。
 
-Dynamic Client
+2、Dynamic Client
 Dynamic client 是一种动态的 client，它能同时处理 kubernetes 所有的资源。并且同时，它也不同于 clientset，dynamic client 返回的对象是一个 map[string]interface{}，如果一个 controller 中需要控制所有的 API，可以使用dynamic client，目前它被用在了 garbage collector 和 namespace controller。
 
 RESTClient
 RESTClient 是 clientset 和 dynamic client 的基础，前面这两个 client 本质上都是 RESTClient，它提供了一些 RESTful 的函数如 Get()，Put()，Post()，Delete()。由 Codec 来提供序列化和反序列化的功能。
 
-Informer
+3、Informer
 ● 等待所有的 cache 同步完成: 这是为了避免生成大量无用的资源，比如 replica set controller 需要watch replica sets 和 pods, 在 cache 还没有同步完之前，controller 可能为一个 replica set 创建了大量重复的 pods，因为这个时候 controller 觉得目前还没有任何的 pods。
 ● 修改 resource 对象前先 deepcopy 一份: 在 Informer 这个模型中，我们的 resource 一般是从本地 cache 中取出的，而本地的 cache 对于用户来说应该是 read-only 的，因为它可能是与其他的 informer 共享的，如果你直接修改 cache 中的对象，可能会引起读写的竞争。
 ● 处理 DeletedFinalStateUnknown 类型对象: 当你的收到一个删除事件时，这个对象有可能不是你想要的类型，即它可能是一个 DeletedFinalStateUnknown，你需要单独处理它。
