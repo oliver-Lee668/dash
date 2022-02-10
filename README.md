@@ -17,7 +17,7 @@ Informer
 ● 在创建事件中注意 Object 已经被删除的情况: 在 Controller 重启的过程中，可能会有一些对象被删除了，重启后，Controller 会收到这些已删除对象的创建事件，请把这些对象正确地删除。  
 ● SharedInformer: 建议使用 SharedInformer, 它会在多个 Informer 中共享一个本地 cache，这里有一 个 factory 来方便你编写一个新的 Informer。
 
-Lister
+Lister  
 Lister 是用来帮助我们访问本地 cache 的一个组件。
 
 Informer的工作流程：  
