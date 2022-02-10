@@ -1,4 +1,4 @@
-使用client-go 中的三种 client：
+#使用client-go 中的三种 client：
 
 Clientset
 Clientset 是我们最常用的 client，你可以在它里面找到 kubernetes 目前所有原生资源对应的 client。 获取方式一般是，指定 group 然后指定特定的 version，然后根据 resource 名字来获取到对应的 client。
