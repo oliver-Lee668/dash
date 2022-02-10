@@ -21,6 +21,7 @@ Lister
 Lister 是用来帮助我们访问本地 cache 的一个组件。
 
 Informer的工作流程：  
+![]( https://github.com/oliver-Lee668/dash/blob/main/images/1.png?raw=true)
 1. 创建一个控制器  
 ● 为控制器创建 workqueue  
 ● 创建 informer, 为 informer 添加 callback 函数，创建 lister
